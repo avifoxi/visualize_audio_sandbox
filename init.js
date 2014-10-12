@@ -4,9 +4,14 @@ console.log('hola from init')
 
 	CONTEXT = new AudioContext();
 
-	var note1 = new synthNote(550);
+	var note1 = new synthNote(261.63);
+	var note2 = new synthNote(392)
+	var note3 = new synthNote(440)
+	var note4 = new synthNote(659.26)
 
-	var annie = new analyzeDest(note1);
+
+
+	var annie = new analyzeDest([note1, note2, note3, note4]);
 
 	var canvas = $('canvas')
 	var HEIGHT = canvas.height()

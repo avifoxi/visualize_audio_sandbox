@@ -4,6 +4,8 @@ console.log('hawo')
 function synthNote(freq) {
 	this.freq = freq;
 	this.osc;
+	this.isPlaying = false;
+
 	
 	var _this = this;
 
@@ -26,35 +28,34 @@ function synthNote(freq) {
 }
 
 
-function analyzeDest(sourceOsc){
+function analyzeDest(synthNotes){
 	
-	this.osc = sourceOsc;
+	this.notes = synthNotes;
 	this.analyser = CONTEXT.createAnalyser();
 	this.destination = CONTEXT.destination
-	this.isPlaying = false;
 
 	var _this = this;
 
-	this.play = function(){
-		_this.osc.makeMeAnOsc();
-		_this.connectToOut();
-		_this.osc.start(0);
+	this.play = function(note){
+		note.makeMeAnOsc();
+		_this.connectToOut(note);
+		note.start(0);
 	}
-	this.stop = function() {
-		_this.osc.disconnect();
-		
+	this.stop = function(note) {
+		note.disconnect();
 	}
-	this.connectToOut = function(){
-		_this.osc.connect(_this.analyser);
+	this.connectToOut = function(note){
+		note.connect(_this.analyser);
 		_this.analyser.connect(_this.destination);
 	}
-	this.toggle = function() {
-		if (_this.isPlaying){
-			_this.stop();
-			_this.isPlaying = !(_this.isPlaying);
+	this.toggle = function(index) {
+		var note = _this.notes[index];
+		if (note.isPlaying){
+			_this.stop(note);
+			note.isPlaying = !(note.isPlaying);
 		} else {
-			_this.play();
-			_this.isPlaying = !(_this.isPlaying);
+			_this.play(note);
+			note.isPlaying = !(note.isPlaying);
 		}
 	}
 }
