@@ -8,10 +8,15 @@ console.log('hola from init')
 	var note2 = new synthNote(392)
 	var note3 = new synthNote(440)
 	var note4 = new synthNote(659.26)
+	var note5 = new synthNote(880);
+	var note6 = new synthNote(987.77)
+	var note7 = new synthNote(1174.66)
+	var note8 = new synthNote(1479.98)
 
 
 
-	var annie = new analyzeDest([note1, note2, note3, note4]);
+
+	var annie = new analyzeDest([note1, note2, note3, note4, note5, note6, note7, note8]);
 
 	var canvas = $('canvas')
 	var HEIGHT = canvas.height()
