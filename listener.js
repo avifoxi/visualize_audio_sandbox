@@ -4,9 +4,9 @@ function addListenerMulti(el, events, fn) {
   }
 }
 
-addListenerMulti(document, ['keyup', 'keydown'], function(e){ ocarinish(e) });
+addListenerMulti(document, ['keyup', 'keydown'], function(e){ trafficCop(e) });
 
-function ocarinish(e) {
+function trafficCop(e) {
 	var index;
 	var action = e.type;
 	switch (e.which) {
@@ -43,8 +43,7 @@ function ocarinish(e) {
 			break;
 			// ;
 		default :
-			console.log("i so sorry but i cannot sing for you");
-    	break;
+			return;
 	}
 
 	if (action === 'keydown'){
