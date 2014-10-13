@@ -45,12 +45,14 @@ function analyzeDest(synthNotes){
 			_this.connectToOut(note);
 			note.start(0);
 			note.isPlaying = true;
+			updateCanvas();
 		}		
 	}
 	this.stop = function(index) {
 		note = _this.notes[index];
 		note.disconnect();
 		note.isPlaying = false;
+		updateCanvas();
 	}
 	this.connectToOut = function(note){
 		note.connect(_this.analyser);
