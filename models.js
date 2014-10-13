@@ -35,29 +35,37 @@ function analyzeDest(synthNotes){
 	this.destination = CONTEXT.destination
 
 	var _this = this;
-
-	this.play = function(note){
-		note.makeMeAnOsc();
-		_this.connectToOut(note);
-		note.start(0);
+ 
+	this.play = function(index){
+		note = _this.notes[index]
+		if (note.isPlaying) {
+			return
+		} else {
+			note.makeMeAnOsc();
+			_this.connectToOut(note);
+			note.start(0);
+			note.isPlaying = true;
+		}		
 	}
-	this.stop = function(note) {
+	this.stop = function(index) {
+		note = _this.notes[index];
 		note.disconnect();
+		note.isPlaying = false;
 	}
 	this.connectToOut = function(note){
 		note.connect(_this.analyser);
 		_this.analyser.connect(_this.destination);
 	}
-	this.toggle = function(index) {
-		var note = _this.notes[index];
-		if (note.isPlaying){
-			_this.stop(note);
-			note.isPlaying = !(note.isPlaying);
-		} else {
-			_this.play(note);
-			note.isPlaying = !(note.isPlaying);
-		}
-	}
+	// this.toggle = function(index) {
+	// 	var note = _this.notes[index];
+	// 	if (note.isPlaying){
+	// 		_this.stop(note);
+	// 		note.isPlaying = !(note.isPlaying);
+	// 	} else {
+	// 		_this.play(note);
+	// 		note.isPlaying = !(note.isPlaying);
+	// 	}
+	// }
 }
 
 
